@@ -5,5 +5,6 @@ services:
   app:
     image: tna0y/ci-app
     build: app
+    container_name: app
     ports:
       - "5000:5000"
