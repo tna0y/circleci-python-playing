@@ -18,14 +18,12 @@ jobs:
           command: |
             sudo add-apt-repository ppa:deadsnakes/ppa
             sudo apt-get update
-            sudo apt-get install python3.6 python3.6-pip
+            sudo apt-get install python3.6
 
       - run:
           name: Install dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
+            python3.6 -m pip install -r requirements.txt
 
       - run:
           name: Install Docker Compose
