@@ -52,8 +52,9 @@ jobs:
           name: Start containers and verify they are working
           command: |
             set -x
-            docker-compose up -d
-            curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:5000/hw
+            docker-compose up -d --build
+            docker run --network container:app \
+                          appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:5000/hw
 
       #- run:
       #    name: run tests
