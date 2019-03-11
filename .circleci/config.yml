@@ -43,6 +43,6 @@ jobs:
             curl --retry 2 --retry-delay 1 http://localhost:5000/hw
 
       - run:
-         name: Run pytest
+          name: Run pytest
           command: |
             python3.6 -m pytest tests/
