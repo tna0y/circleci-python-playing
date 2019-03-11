@@ -42,12 +42,7 @@ jobs:
             sleep 5
             curl --retry 2 --retry-delay 1 http://localhost:5000/hw
 
-      #- run:
-      #    name: run tests
-      #    command: |
-      #      . venv/bin/activate
-      #      python manage.py test
-
-      #- store_artifacts:
-      #    path: test-reports
-      #    destination: test-reports
+      - run:
+         name: Run pytest
+          command: |
+            python3.6 -m pytest tests/
