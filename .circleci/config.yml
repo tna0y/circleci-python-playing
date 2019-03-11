@@ -53,7 +53,7 @@ jobs:
           command: |
             set -x
             docker-compose up -d
-            docker run appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://app:5000/hw
+            curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:5000/hw
 
       #- run:
       #    name: run tests
