@@ -51,5 +51,13 @@ jobs:
           command: |
             python3.6 -m pytest tests/
 
+      - run:
+        name: Deploy to docker Hub (dev)
+        command: |
+          if [ "${CIRCLE_BRANCH}" == "dev" ];
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker-compose -f docker-compose-dev.yml push
+          fi
+
 
 
