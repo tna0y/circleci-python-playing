@@ -51,15 +51,15 @@ jobs:
           command: |
             python3.6 -m pytest tests/
 
-      - type: deploy
-          name: Deploy to Docker Hub (dev)
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "dev" ];
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker-compose -f docker-compose-dev.yml push
-            fi
+      - run:
+        name: Deploy to Docker Hub (dev)
+        command: |
+          if [ "${CIRCLE_BRANCH}" == "dev" ];
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker-compose -f docker-compose-dev.yml push
+          fi
 
-      - type: deploy
+      - run:
         name: Deploy to Docker Hub (master)
         command: |
           if [ "${CIRCLE_BRANCH}" == "master" ];
