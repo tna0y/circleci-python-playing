@@ -8,7 +8,7 @@ def hw():
     return 'Hello, World'
 
 @app.route('/hw2')
-def hw():
+def hw2():
     return 'Hello, World 2'
 
 
