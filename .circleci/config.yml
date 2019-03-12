@@ -46,3 +46,10 @@ jobs:
           name: Run pytest
           command: |
             python3.6 -m pytest tests/
+
+      - run:
+          name: Push to docker hub
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push company/app:$CIRCLE_BRANCH
+
