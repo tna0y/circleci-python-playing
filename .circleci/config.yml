@@ -52,19 +52,19 @@ jobs:
             python3.6 -m pytest tests/
 
       - run:
-        name: Deploy to docker Hub (dev)
-        command: |
-          if [ "${CIRCLE_BRANCH}" = "dev" ]; then
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker-compose -f docker-compose-dev.yml push
-          fi
+          name: Deploy to docker Hub (dev)
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "dev" ]; then
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker-compose -f docker-compose-dev.yml push
+            fi
 
       - run:
-        name: Deploy to docker Hub (prod)
-        command: |
-          if [ "${CIRCLE_BRANCH}" = "master" ]; then
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          docker-compose -f docker-compose-prod.yml build
-          docker-compose -f docker-compose-prod.yml push
-          fi
+          name: Deploy to docker Hub (prod)
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker-compose -f docker-compose-prod.yml build
+            docker-compose -f docker-compose-prod.yml push
+            fi
 
