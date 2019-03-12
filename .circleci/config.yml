@@ -9,6 +9,7 @@ jobs:
       only:
       - master
       - dev
+      - /feature-.*/
     machine:
       image: true
 
