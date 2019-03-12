@@ -3,7 +3,7 @@ version: "3.5"
 
 services:
   app:
-    image: tna0y/ci-app
+    image: tna0y/ci-app:app-dev
     build: app
     container_name: app
     ports:

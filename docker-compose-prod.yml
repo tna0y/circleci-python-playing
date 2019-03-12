@@ -1,0 +1,11 @@
+version: "3.5"
+
+
+services:
+  app:
+    # using tags to distinguish between containers to utilize one free repo on docker hub.
+    image: tna0y/ci-app:app-master
+    build: app
+    container_name: app
+    ports:
+      - "5000:5000"

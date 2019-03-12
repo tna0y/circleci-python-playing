@@ -5,6 +5,10 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+      - master
+      - dev
     machine:
       image: true
 
@@ -37,7 +41,7 @@ jobs:
           name: Start containers and verify they are working
           command: |
             set -x
-            docker-compose up -d --build
+            docker-compose -f docker-compose-dev.yml up -d --build
             echo "Wait for 5 sec for servers to spin up"
             sleep 5
             curl --retry 2 --retry-delay 1 http://localhost:5000/hw
@@ -47,9 +51,20 @@ jobs:
           command: |
             python3.6 -m pytest tests/
 
-      - run:
-          name: Push to docker hub
+      - type: deploy
+          name: "Deploy to Docker Hub (dev)"
           command: |
+            if [ "${CIRCLE_BRANCH}" == "dev" ];
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker-compose -f docker-compose-dev.yml push
+            fi
+
+      - type: deploy
+        name: "Deploy to Docker Hub (master)"
+        command: |
+          if [ "${CIRCLE_BRANCH}" == "master" ];
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker-compose push
+            docker-compose -f docker-compose-prod.yml  build
+            docker-compose -f docker-compose-prod.yml  push
+          fi
 
